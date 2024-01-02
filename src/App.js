@@ -1,4 +1,5 @@
 import {Component} from "react"
+import QuestionsList from "./components/QuestionsList"
 import { IoHomeSharp,IoPricetags,IoHelpBuoyOutline} from "react-icons/io5";
 import { FaQuestion,FaUsers,FaPlus,FaSearch} from "react-icons/fa";
 import { PiSuitcaseSimpleFill } from "react-icons/pi";
@@ -6,27 +7,48 @@ import { LiaStarSolid } from "react-icons/lia";
 import {RiDiscussFill} from "react-icons/ri"
 import { BiSolidInfoCircle } from "react-icons/bi";
 import { HiMiniComputerDesktop } from "react-icons/hi2";
+
 import './App.css';
 
 class App extends Component {
+    state={questionsList:[]}
 
-  getQuestions=async()=>{
-   const url="https://stackapps.com/questions/ask?tags=app"
-   const response=await fetch(url)
-   const data=response.json()
-   if (response.ok){
-   console.log(data)
-  }else{
-    console.log("fetch failed")
-  }
-}
+    componentDidMount(){
+      this.getQuestions()
+    }
+
+      getQuestions=async()=>{
+      const url="https://api.stackexchange.com/2.3/questions?order=desc&sort=activity&site=stackoverflow"
+      const response=await fetch(url)
+      
+      if (response.ok){
+        const data=await response.json()
+       
+        const updatedData=data.items.map(each=>({
+          viewCount:each.view_count,
+          answerCount:each.answer_count,
+          title:each.title,
+          score:each.score,
+          profileImage:each.owner.profile_image,
+          displayName:each.owner.display_name,
+          reputation:each.owner.reputation,
+          tags:each.tags,
+          questionId:each.question_id,
+          
+        }))
+          this.setState({questionsList:updatedData})
+      }else{
+        console.log("fetch failed")
+      }
+    }
 
 
   render(){
+    const {questionsList}=this.state
   return (
     <div>
     <div className="app">
-      <img src="https://www.zdnet.com/a/img/resize/fc7b8d4b1f4b34862881ebf41dec855600480098/2022/08/01/71433421-11f6-4ee9-97d5-3249e8457842/stack-overflow-logo-crop-for-twitter.jpg?auto=webp&width=1280" className="logo" alt="stack logo" />
+      <img src="https://www.ranklogos.com/wp-content/uploads/2015/06/Stack-Overflow-Logo.png" className="logo" alt="stack logo" />
       <div className="lists">
         <p className="list">About</p>
         <p className="list">Products</p>
@@ -107,16 +129,62 @@ class App extends Component {
         </div>
         </div>
         <h1 className="heading">Questions</h1>
-        <ul className="topics">
-          <li className="topic">Intersting</li>
-          <li className="topic">featured <span style={{border:"1px solid orange",borderRadius:"5px",padding:"2px"}}>432</span></li>
-          <li className="topic">hot</li>
-          <li className="topic">week</li>
-          <li className="topic">month</li>
-        
+        <ul className="questions-list-container">
+          {questionsList.map(each=>(
+            <QuestionsList key={each.questionId} details={each}/>
+          ))}
         </ul>
       </div>
      </div>
+     <div className="bottom-part">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/ef/Stack_Overflow_icon.svg/768px-Stack_Overflow_icon.svg.png" className="image" alt="stackflow"/>
+        <ul className="features-container">
+          <li className="features">
+            <h1 className="side-heading">STACK OVERFLOW</h1>
+              <div className="topics">
+                <p className="topic">questions</p>
+                <p className="topic">Help</p>
+              </div>
+          </li>
+          <li className="features">
+            <h1 className="side-heading">PRODUCTS</h1>
+              <div className="topics">
+                <p className="topic">Teams</p>
+                <p className="topic">Advertising</p>
+                <p className="topic">Collectives</p>
+                <p className="topic">Talent</p>
+              
+              </div>
+          </li>
+          <li className="features">
+            <h1 className="side-heading">COMPANY</h1>
+              <div className="topics">
+                <p className="topic">About</p>
+                <p className="topic">Press</p>
+                <p className="topic">Work Here</p>
+                <p className="topic">Legal</p>
+                <p className="topic">Privacy Policy</p>
+                <p className="topic">Terms of Service</p>
+                <p className="topic">Contact Us</p>
+                <p className="topic">Cookie Settings</p>
+              </div>
+          </li>
+          <li className="features">
+            <h1 className="side-heading">STACK EXCHANGENETWORK</h1>
+              <div className="topics">
+                <p className="topic">Technology</p>
+                <p className="topic">Culture & recreation</p>
+                <p className="topic">Life & arts</p>
+                <p className="topic">Science</p>
+                <p className="topic">Professional</p>
+                <p className="topic">Business</p>
+                <p className="topic">API</p>
+                <p className="topic">Data</p>
+              </div>
+          </li>
+        </ul>
+     </div>
+     
      </div>
   );
 }

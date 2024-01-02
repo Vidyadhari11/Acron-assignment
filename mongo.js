@@ -1,5 +1,5 @@
 const mongoose=require("mongoose")
-mongoose.connect("mongodb://localhost:27017/stackflow-questions")
+mongoose.connect("http://www.stackfow.com/2.3/collections")
 .then(()=>{console.log("mongodb connected")})
 .catch(()=>{console.log("failed")})
 
