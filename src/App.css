@@ -1,38 +1,139 @@
-.App {
-  text-align: center;
+.app{
+  display:flex;
+  flex-direction: row;
+  align-items: center;
+  background-color: darkgrey;
+  justify-content: space-between;
+  padding:10px;
 }
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.header {
+  
+  display: flex;
+  align-items: center;
 }
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.logo{
+  height:60px;
+  width:60px;
+  border-radius: 5px;
 }
+.heading{
+  
+  font-size: 25px;
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+  font-family: "Roboto";
+}
+.lists{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.list{
+  color:white;
+  font-family: roboto;
+  font-size: 23px;
+  margin: 10px;
+}
+.below-part{
+  display:flex;
+
+}
+.items-container{
   display: flex;
   flex-direction: column;
+  width:15vw;
+  height:90vh;
+  list-style-type: none;
+  overflow: scroll;
+}
+.item{
+  display:flex;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
 }
-
-.App-link {
-  color: #61dafb;
+.name{
+  color:black;
+  font-size: 15px;
+  margin-left: 12px;
 }
+.name1{
+  width:70%;
+  margin-right:5px;
+}
+.team-item{
+  display:flex;
+  flex-direction: column;
+}
+.team-box{
+  border:1px solid lightgrey;
+  border-radius: 4px;
+  padding:5px 5px 5px 10px;
+  margin: 3px;
+}
+.button{
+  background-color: orange;
+  color:white;
+  border-radius: 6px;
+  border:none;
+  padding:6px;
+  margin-top: 10px;
+}
+.questions-container{
+  display:flex;
+  flex-direction: column;
+  margin-left: 15px;
+  width:50vw;
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+}
+.side-header{
+  display: flex;
+  justify-content:space-between;
+  align-items: center;
+}
+.search-container{
+  margin-top: 12px;
+  display: flex;
+  border:1px solid lightgray;
+  border-radius: 3px;
+  width:50vw;
+  height:25px;
+  padding:8px
+}
+.search-icon{
+  height:28px;
+}
+.search{
+  border:none;
+  background: transparent;
+  color:black;
+  font-size: 15px;
+  width:100%;
+  outline:none;
+  margin-left: 20px;
+}
+.right-part{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.card-container{
+  list-style-type: none;
+  display:flex;
+
+}
+.card-item{
+  margin-right: 12px;
+  display: flex;
+  height:30px;
+  align-items: center;
+}
+.topics{
+  list-style-type: none;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+}
+.topic{
+  margin-right: 20px;
+  font-size: 20px;
+  font-family: roboto;
+ 
 }
